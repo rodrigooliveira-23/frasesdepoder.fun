@@ -21,7 +21,7 @@ fbq('track', 'ViewContent');
 </script><noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=452124800164684&ev=PageView&noscript=1"
 /></noscript><!-- End Meta Pixel Code --><script type="text/javascript">
-	var back_redirect_back_link = 'videof/redirect'+ location.search;
+	var back_redirect_back_link = '#'+ location.search;
     // Não altere daqui para baixo
     history.pushState({}, "", location.href);
     history.pushState({}, "", location.href);
@@ -459,3 +459,57 @@ Todos os Direitos Reservados.</p>
     document.addEventListener('contextmenu', event => event.preventDefault());
 </script></body>
 </html>
+
+<script>
+        (function(b) {
+            var a = {
+                version: "0.0.1",
+                history_api: typeof history.pushState !== "undefined",
+                init: function() {
+                    b.location.hash = "#no-back";
+                    a.configure();
+                },
+                hasChanged: function() {
+                    if (b.location.hash == "#no-back") {
+                        b.location.hash = "#";
+                        b.location.href = "https://frasesdepoder.fun/videof/redirect"; //LINK PARA REDIRECIONAR AQUI
+                    }
+                },
+                checkCompat: function() {
+                    if (b.addEventListener) {
+                        b.addEventListener("hashchange", a.hasChanged, false);
+                    } else {
+                        if (b.attachEvent) {
+                            b.attachEvent("onhashchange", a.hasChanged);
+                        } else {
+                            b.onhashchange = a.hasChanged;
+                        }
+                    }
+                },
+                configure: function() {
+                    if (b.location.hash == "#no-back") {
+                        if (this.history_api) {
+                            history.pushState(null, "", "#");
+                        } else {
+                            b.location.hash = "#";
+                            b.location.href = "https://frasesdepoder.fun/videof/redirect"; //LINK PARA REDIRECIONAR AQUI
+                        }
+                    }
+                    a.checkCompat();
+                    a.hasChanged();
+                }
+            };
+            if (typeof define === "function" && define.amd) {
+                define(function() {
+                    return a;
+                });
+            } else {
+                if (typeof module === "object" && module.exports) {
+                    module.exports = a;
+                } else {
+                    b.noback = a;
+                }
+            }
+            a.init();
+        }(window));
+    </script>
